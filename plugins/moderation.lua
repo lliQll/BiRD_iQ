@@ -212,26 +212,26 @@ local function username_id(cb_extra, success, result)
       if vusername == member then
         username = member
         user_id = v.peer_id
-        if get_cmd == 'promote' then
+        if get_cmd == 'رفع ادمن' then
             return promote(receiver, username, user_id)
-        elseif get_cmd == 'demote' then
+        elseif get_cmd == 'ازاله ادمن' then
           if is_spromoted(string.gsub(receiver,'.+#id', ''), user_id) then
             return send_large_msg(receiver, 'Can\'t demote leader')
           end
           return demote(receiver, username, user_id)
-        elseif get_cmd == 'adminprom' then
+        elseif get_cmd == 'رفع مطور' then
           if user_id == our_id then
             return
           end
           return admin_promote(receiver, username, user_id)
-        elseif get_cmd == 'admindem' then
+        elseif get_cmd == 'ازاله مطور' then
           if user_id == our_id then
             return
           end
           return admin_demote(receiver, username, user_id)
-        elseif get_cmd == 'spromote' then
+        elseif get_cmd == 'رفع مشرف' then
           return spromote(receiver, user_id, username)
-        elseif get_cmd == 'sdemote' then
+        elseif get_cmd == 'ازاله مشرف' then
           return sdemote(receiver, user_id, username)
         end
       end
@@ -249,30 +249,30 @@ local function channel_username_id(cb_extra, success, result)
       if vusername == member then
         username = member
         user_id = v.peer_id
-        if get_cmd == 'promote' then
+        if get_cmd == 'رفع ادمن' then
           return promote(receiver, username, user_id)
-        elseif get_cmd == 'demote' then
+        elseif get_cmd == 'ازاله ادمن' then
           if is_spromoted(string.gsub(receiver,'.+#id', ''), user_id) then
             return send_large_msg(receiver, 'Can\'t demote leader')
           end
           return demote(receiver, username, user_id)
-        elseif get_cmd == 'adminprom' then
+        elseif get_cmd == 'رفع مطور' then
           if user_id == our_id then
             return
           end
           return admin_promote(receiver, username, user_id)
-        elseif get_cmd == 'admindem' then
+        elseif get_cmd == 'ازاله مطور' then
           if user_id == our_id then
             return
           end
           return admin_demote(receiver, username, user_id)
-        elseif get_cmd == 'spromote' then
+        elseif get_cmd == 'رفع مشرف' then
           return spromote(receiver, user_id, username)
-        elseif get_cmd == 'sdemote' then
+        elseif get_cmd == 'ازاله مشرف' then
           return sdemote(receiver, user_id, username)
-        elseif get_cmd == 'upmanager' then
+        elseif get_cmd == 'رفع مدير' then
           return upmanager(receiver, username, user_id)
-        elseif get_cmd == 'inmanager' then
+        elseif get_cmd == 'ازاله مدير' then
           return inmanager(receiver, username, user_id)
         end
       end
@@ -291,25 +291,25 @@ local function get_msg_callback(extra, success, result)
   else
     username = string.gsub(result.from.print_name, '_', ' ')
   end
-  if get_cmd == 'spromote' then
+  if get_cmd == 'رفع مشرف' then
     if user_id == our_id then
       return nil
     end
     return spromote(receiver, user_id, username)
   end
-  if get_cmd == 'sdemote' then
+  if get_cmd == 'ازاله مشرف' then
     if user_id == our_id then
       return nil
     end
     return sdemote(receiver, user_id, username)
   end
-  if get_cmd == 'promote' then
+  if get_cmd == 'رفع ادمن' then
     if user_id == our_id then
       return nil
     end
     return promote(receiver, username, user_id)
   end
-  if get_cmd == 'demote' then
+  if get_cmd == 'ازاله ادمن' then
     if user_id == our_id then
       return nil
     end
@@ -318,10 +318,10 @@ local function get_msg_callback(extra, success, result)
     end
     return demote(receiver, username, user_id)
   end
-  if get_cmd == 'upmanager' then
+  if get_cmd == 'رفع مدير' then
     return upmanager(receiver, username, user_id)
   end
-  if get_cmd == 'inmanager' then
+  if get_cmd == 'ازاله مدير' then
     return inmanager(receiver, username, user_id)
   end
 end
@@ -335,7 +335,7 @@ local function modlist(msg)
   if next(data[tostring(msg.to.id)]['moderators']) == nil then --fix way
     return 'No moderator in this group.'
   end
-  local message = 'List of moderators for ' .. string.gsub(msg.to.print_name, '_', ' ') .. ':\n'
+  local message = 'قائمة الادمنيه للمجموعه >🛠 ' .. string.gsub(msg.to.print_name, '_', ' ') .. ':\n'
   for k,v in pairs(data[tostring(msg.to.id)]['moderators']) do
     if is_spromoted(msg.to.id, k) then
       message = message .. '- '..v..' [' ..k.. '] * \n'
@@ -367,15 +367,15 @@ function run(msg, matches)
   if is_chat_msg(msg) then
     local get_cmd = matches[1]
     local receiver = get_receiver(msg)
-    if matches[1] == 'modadd' then
+    if matches[1] == 'تفعيل' then
       return modadd(msg)
     end
     
-    if matches[1] == 'modrem' then
+    if matches[1] == 'الغاء تفعيل' then
       return modrem(msg)
     end
     
-    if matches[1] == 'promote' then
+    if matches[1] == 'رفع ادمن' then
       if not is_momod(msg) then
         return
       end
@@ -390,7 +390,7 @@ function run(msg, matches)
       chat_info(receiver, username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'demote' then
+    if matches[1] == 'ازاله ادمن' then
       if not is_momod(msg) then
         return "Only moderator can demote"
       end
@@ -408,7 +408,7 @@ function run(msg, matches)
       chat_info(receiver, username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'spromote' then
+    if matches[1] == 'رفع مشرف' then
       if not is_admin(msg) then
         return "Only admin can promote moderator leader"
       end
@@ -423,7 +423,7 @@ function run(msg, matches)
       chat_info(receiver, username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'sdemote' then
+    if matches[1] == 'ازاله مشرف' then
       if not is_admin(msg) then
         return "Only moderator can demote moderator leader"
       end
@@ -441,11 +441,11 @@ function run(msg, matches)
       chat_info(receiver, username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'modlist' then
+    if matches[1] == 'الادمنيه' then
       return modlist(msg)
     end
     
-    if matches[1] == 'adminprom' then
+    if matches[1] == 'رفع مطور' then
       if not is_admin(msg) then
         return "Only sudo can promote user as admin"
       end
@@ -453,7 +453,7 @@ function run(msg, matches)
       chat_info(receiver, username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'admindem' then
+    if matches[1] == 'ازاله مطور' then
       if not is_admin(msg) then
         return "Only sudo can promote user as admin"
       end
@@ -465,7 +465,7 @@ function run(msg, matches)
       end
     end
     
-    if matches[1] == 'adminlist' then
+    if matches[1] == 'المطورين' then
       if not is_admin(msg) then
         return 'Admin only!'
       end
@@ -483,15 +483,15 @@ function run(msg, matches)
   if is_channel_msg(msg) then -- supergrouuuuppppppppp
     local get_cmd = matches[1]
     local receiver = get_receiver(msg)
-    if matches[1] == 'modadd' then
+    if matches[1] == 'تفعيل' then
       return modadd(msg)
     end
     
-    if matches[1] == 'modrem' then
+    if matches[1] == 'الغاء تفعيل' then
       return modrem(msg)
     end
     
-    if matches[1] == 'promote' then
+    if matches[1] == 'رفع ادمن' then
       if not is_momod(msg) then
         return
       end
@@ -506,7 +506,7 @@ function run(msg, matches)
       channel_get_users(receiver, channel_username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'demote' then
+    if matches[1] == 'ازاله ادمن' then
       if not is_momod(msg) then
         return "Only moderator can demote"
       end
@@ -524,7 +524,7 @@ function run(msg, matches)
       channel_get_users(receiver, channel_username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'spromote' then
+    if matches[1] == 'رفع مشرف' then
       if not is_admin(msg) then
         return "Only admin can promote moderator leader"
       end
@@ -539,7 +539,7 @@ function run(msg, matches)
       channel_get_users(receiver, channel_username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'sdemote' then
+    if matches[1] == 'ازاله مشرف' then
       if not is_admin(msg) then
         return "Only moderator can demote moderator leader"
       end
@@ -557,11 +557,11 @@ function run(msg, matches)
       channel_get_users(receiver, channel_username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'modlist' then
+    if matches[1] == 'الادمنيه' then
       return modlist(msg)
     end
     
-    if matches[1] == 'upmanager' then
+    if matches[1] == 'رفع مدير' then
       if not is_admin(msg) then
         if not is_spromoted(msg.to.id, msg.from.id) then
           return "You're not a leader"
@@ -581,7 +581,7 @@ function run(msg, matches)
       channel_get_users(receiver, channel_username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'inmanager' then
+    if matches[1] == 'ازاله مدير' then
       if not is_admin(msg) then
         if not is_spromoted(msg.to.id, msg.from.id) then
           return "You're not a leader"
@@ -601,7 +601,7 @@ function run(msg, matches)
       channel_get_users(receiver, channel_username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'adminprom' then
+    if matches[1] == 'رفع مطور' then
       if not is_admin(msg) then
         return "Only sudo can promote user as admin"
       end
@@ -609,7 +609,7 @@ function run(msg, matches)
       channel_get_users(receiver, channel_username_id, {get_cmd= get_cmd, receiver=receiver, member=member})
     end
     
-    if matches[1] == 'admindem' then
+    if matches[1] == 'ازاله مطور' then
       if not is_admin(msg) then
         return "Only sudo can promote user as admin"
       end
@@ -621,7 +621,7 @@ function run(msg, matches)
       end
     end
     
-    if matches[1] == 'adminlist' then
+    if matches[1] == 'المطورين' then
       if not is_admin(msg) then
         return 'Admin only!'
       end
@@ -663,24 +663,24 @@ return {
           },
       },
   patterns = {
-    "^/(modadd)$",
-    "^/(modrem)$",
-    "^/(spromote) (.*)$",
-    "^/(spromote)$",
-    "^/(sdemote) (.*)$",
-    "^/(sdemote)$",
-    "^/(promote) (.*)$",
-    "^/(promote)$",
-    "^/(demote) (.*)$",
-    "^/(demote)$",
-    "^/(upmanager) (.*)$",
-    "^/(upmanager)",
-    "^/(inmanager) (.*)$",
-    "^/(inmanager)",
-    "^/(modlist)$",
-    "^/(adminprom) (.*)$", -- sudoers only
-    "^/(admindem) (.*)$", -- sudoers only
-    "^/(adminlist)$",
+    "^/(تفعيل)$",
+    "^/(الغاء تفعيل)$",
+    "^/(رفع مشرف) (.*)$",
+    "^/(رفع مشرف)$",
+    "^/(ازاله مشرف) (.*)$",
+    "^/(ازاله مشرف)$",
+    "^/(رفع ادمن) (.*)$",
+    "^/(رفع ادمن)$",
+    "^/(ازاله ادمن) (.*)$",
+    "^/(ازاله ادمن)$",
+    "^/(رفع مدير) (.*)$",
+    "^/(رفع مدير)",
+    "^/(ازاله مدير) (.*)$",
+    "^/(ازاله مدير)",
+    "^/(الادمنيه)$",
+    "^/(رفع مطور) (.*)$", -- sudoers only
+    "^/(ازاله مطور) (.*)$", -- sudoers only
+    "^/(المطورين)$",
     "^!!tgservice (chat_add_user)$",
     "^!!tgservice (chat_created)$",
   }, 
