@@ -135,12 +135,12 @@ local function lock_group_member(msg, data)
     end
     local group_member_lock = data[tostring(msg.to.id)]['settings']['lock_member']
     if group_member_lock == 'yes' then
-        return 'Group members are already locked'
+        return 'الاضافه مقفوله بالفعل🔐'
     else
         data[tostring(msg.to.id)]['settings']['lock_member'] = 'yes'
         save_data(_config.moderation.data, data)
     end
-    return 'Group members has been locked'
+    return 'تم قفل اضافة الاعضاء🔒♨️'
 end
 
 local function unlock_group_member(msg, data)
@@ -149,11 +149,11 @@ local function unlock_group_member(msg, data)
     end
     local group_member_lock = data[tostring(msg.to.id)]['settings']['lock_member']
     if group_member_lock == 'no' then
-        return 'Group members are not locked'
+        return 'الاضافه مفتوحه بالفعل🔓'
     else
         data[tostring(msg.to.id)]['settings']['lock_member'] = 'no'
         save_data(_config.moderation.data, data)
-    return 'Group members has been unlocked'
+    return 'تم فتح اضافة الاعضاء🔓☑️'
     end
 end
 
@@ -196,7 +196,7 @@ local function lock_group_link(msg, data)
         data[tostring(msg.to.id)]['settings']['lock_link'] = 'yes'
         save_data(_config.moderation.data, data)
     end
-    return 'Anti link has been locked'
+    return 'تم تفعيل منع الاعلانات عن القنوات والبوتات واخرى,,⚡️🔒'
 end
 
 local function unlock_group_link(msg, data)
@@ -219,12 +219,12 @@ local function lock_group_inviteme(msg, data)
     end
     local group_inviteme_lock = data[tostring(msg.to.id)]['settings']['lock_inviteme']
     if group_inviteme_lock == 'yes' then
-        return 'Join group already locked'
+        return 'قفل الانضمام 😊〰🍂 مفعل سابقاا ☑️'
     else
         data[tostring(msg.to.id)]['settings']['lock_inviteme'] = 'yes'
         save_data(_config.moderation.data, data)
     end
-    return 'Join group has been locked'
+    return 'تم قفل الانضمام 😊〰🍂 لا يسمح للاعظاء الدخول للسوبر گروب ☑️'
 end
 
 local function unlock_group_inviteme(msg, data)
@@ -233,11 +233,11 @@ local function unlock_group_inviteme(msg, data)
     end
     local group_inviteme_lock = data[tostring(msg.to.id)]['settings']['lock_inviteme']
     if group_inviteme_lock == 'no' then
-        return 'Join group is not locked'
+        return 'فتح الانضمام 〰😊مفعل سابقا☑️➖➖️'
     else
         data[tostring(msg.to.id)]['settings']['lock_inviteme'] = 'no'
         save_data(_config.moderation.data, data)
-    return 'Join group has been unlocked'
+    return 'تم فتح الانضمام〰😊 يسمح للاعظاء الدخول للسوبر گروب ☑️'
     end
 end
 
@@ -319,12 +319,12 @@ local function lock_group_sticker(msg, data)
     end
     local group_sticker_lock = data[tostring(msg.to.id)]['settings']['lock_sticker']
     if group_sticker_lock == 'yes' then
-        return 'Anti sticker already enabled'
+        return 'منع ارسال ملصق داخل المجموعه ☑️ مفعل ➖🍂'
     else
         data[tostring(msg.to.id)]['settings']['lock_sticker'] = 'yes'
         save_data(_config.moderation.data, data)
     end
-    return 'Anti sticker has been enabled'
+    return 'تم منع ارسال ملصق داخل المجموعه ☑️'
 end
 
 local function unlock_group_sticker(msg, data)
@@ -337,7 +337,7 @@ local function unlock_group_sticker(msg, data)
     else
         data[tostring(msg.to.id)]['settings']['lock_sticker'] = 'no'
         save_data(_config.moderation.data, data)
-    return 'Anti sticker has been disabled'
+    return 'تم تعطيل منع ملصقات ☑️🔛'
     end
 end
 
@@ -347,12 +347,12 @@ local function lock_group_image(msg, data)
     end
     local group_image_lock = data[tostring(msg.to.id)]['settings']['lock_image']
     if group_image_lock == 'yes' then
-        return 'Image lock already enabled'
+        return 'منع الصور مفعل بالفعل في المجموعة⚡️🔐➖〰'
     else
         data[tostring(msg.to.id)]['settings']['lock_image'] = 'yes'
         save_data(_config.moderation.data, data)
     end
-    return 'Image lock has been enabled'
+    return 'تم منع الصور في المجموعة ⚡️🔒'
 end
 
 local function unlock_group_image(msg, data)
@@ -361,11 +361,11 @@ local function unlock_group_image(msg, data)
     end
     local group_image_lock = data[tostring(msg.to.id)]['settings']['lock_image']
     if group_image_lock == 'no' then
-        return 'Image lock is not enabled'
+        return 'سماح الصور بالمجموعة مفعل 😈⚡️'
     else
         data[tostring(msg.to.id)]['settings']['lock_image'] = 'no'
         save_data(_config.moderation.data, data)
-    return 'Image lock has been disabled'
+    return 'تم سماح الصور في المجموعة✅⚡️'
     end
 end
 
@@ -382,7 +382,6 @@ end
     end
     return 'Anti sticker has been enabled'
 end
-
 local function unlock_group_video(msg, data)
     if not is_momod(msg) then
         return "For moderators only!"
@@ -396,7 +395,6 @@ local function unlock_group_video(msg, data)
     return 'Anti sticker has been disabled'
     end
 end
-
 local function lock_group_audio(msg, data)
     if not is_momod(msg) then
         return "For moderators only!"
@@ -410,7 +408,6 @@ local function lock_group_audio(msg, data)
     end
     return 'Lock audio has been enabled'
 end
-
 local function unlock_group_audio(msg, data)
     if not is_momod(msg) then
         return "For moderators only!"
@@ -436,7 +433,7 @@ local function lock_group_file(msg, data)
         data[tostring(msg.to.id)]['settings']['lock_file'] = 'yes'
         save_data(_config.moderation.data, data)
     end
-    return 'Lock file has been enabled'
+    return 'تم قفل الملفات في المجموعه ➖🍂'
 end
 
 local function unlock_group_file(msg, data)
@@ -464,7 +461,7 @@ local function lock_group_talk(msg, data)
         data[tostring(msg.to.id)]['settings']['lock_talk'] = 'yes'
         save_data(_config.moderation.data, data)
     end
-    return 'Silent group has been enabled'
+    return 'تم قفل الدردشه 😈〰 ||'
 end
 
 local function unlock_group_talk(msg, data)
@@ -473,11 +470,11 @@ local function unlock_group_talk(msg, data)
     end
     local group_talk_lock = data[tostring(msg.to.id)]['settings']['lock_talk']
     if group_talk_lock == 'no' then
-        return 'Silent group is not enabled'
+        return 'الدردشه مفتوحه بالفعل😊〰!'
     else
         data[tostring(msg.to.id)]['settings']['lock_talk'] = 'no'
         save_data(_config.moderation.data, data)
-    return 'Silent group has been disabled'
+    return 'تم فتح الدردشه 😊🍂'
     end
 end
 
@@ -752,19 +749,19 @@ function run(msg, matches)
         if data[tostring(msg.to.id)] then
         	local settings = data[tostring(msg.to.id)]['settings']
         	local get_cmd = matches[1]
-            if matches[1] == 'block' and matches[2] then
+            if matches[1] == 'قفل' and matches[2] then
                 if not is_momod(msg) then
                     return "For moderators only!"
                 end
                 return block_word(receiver, matches[2])
             end
-            if matches[1] == 'unblock' and matches[2] then
+            if matches[1] == 'فتح' and matches[2] then
                 if not is_momod(msg) then
                     return "For moderators only!"
                 end
                 return unblock_word(receiver, matches[2])
             end
-            if matches[1] == 'getlink' then
+            if matches[1] == 'الرابط' then
                 if not is_momod(msg) then
                     return "For moderators only!"
                 end
@@ -776,7 +773,7 @@ function run(msg, matches)
                     export_chat_link(receiver, generate_link, {receiver=receiver, data=data, user_id=msg.from.id})
                 end
             end
-            if matches[1] == 'relink'then
+            if matches[1] == 'رابط'then
                 if not is_momod(msg) then
                     return "Moderators only!"
                 end
@@ -786,46 +783,46 @@ function run(msg, matches)
                     return "Group ID didn't match. Reset invite link failed!"
                 end
             end
-            if matches[1] == 'setabout' and matches[2] then
+            if matches[1] == 'ضع الوصف' and matches[2] then
                 deskripsi = matches[2]
                 return set_description(msg, data)
             end
-            if matches[1] == 'about' then
+            if matches[1] == 'الوصف' then
                 return get_description(msg, data)
             end
-            if matches[1] == 'setrules' then
+            if matches[1] == 'ضع قوانين' then
                 rules = matches[2]
                 return set_rules(msg, data)
             end
-            if matches[1] == 'rules' then
+            if matches[1] == 'قواين' then
                 return get_rules(msg, data)
             end
-            if matches[1] == 'close' then --group lock *
-                if matches[2] == 'name' then
+            if matches[1] == 'قفل' then --group lock *
+                if matches[2] == 'الاسم' then
                     return lock_group_name(msg, data)
                 end
-                if matches[2] == 'member' then
+                if matches[2] == 'الاضافه' then
                     return lock_group_member(msg, data)
                 end
-                if matches[2] == 'photo' then
+                if matches[2] == 'الصوره' then
                     return lock_group_photo(msg, data)
                 end
                 --if matches[2] == 'bot' then
                 --	return lock_group_bot(msg, data)
                 --end
-                if matches[2] == 'link' then
+                if matches[2] == 'الروابط' then
                 	return lock_group_link(msg, data)
                 end
-                if matches[2] == 'join' then
+                if matches[2] == 'الانضمام' then
                 	return lock_group_inviteme(msg, data)
                 end
-                if matches[2] == 'sticker' then
+                if matches[2] == 'الملصقات' then
                 	return lock_group_sticker(msg, data)
                 end
-                if matches[2] == 'image' then
+                if matches[2] == 'الصور' then
                 	return lock_group_image(msg, data)
                 end
-                if matches[2] == 'file' then
+                if matches[2] == 'الملفات' then
                 	return lock_group_file(msg, data)
                 end
                 --if matches[2] == 'chat' then
@@ -835,32 +832,32 @@ function run(msg, matches)
                 	return lock_group_all(msg, data)
                 end
             end
-            if matches[1] == 'open' then --group unlock *
-                if matches[2] == 'name' then
+            if matches[1] == 'فتح' then --group unlock *
+                if matches[2] == 'الاسم' then
                     return unlock_group_name(msg, data)
                 end
-                if matches[2] == 'member' then
+                if matches[2] == 'الاضافه' then
                     return unlock_group_member(msg, data)
                 end
-                if matches[2] == 'photo' then
+                if matches[2] == 'الصوره' then
                     return unlock_group_photo(msg, data)
                 end
                 --if matches[2] == 'bot' then
                 --	return unlock_group_bot(msg, data)
                 --end
-                if matches[2] == 'link' then
+                if matches[2] == 'الروابط' then
                 	return unlock_group_link(msg, data)
                 end
-                if matches[2] == 'join' then
+                if matches[2] == 'الانضمام' then
                 	return unlock_group_inviteme(msg, data)
                 end
-                if matches[2] == 'sticker' then
+                if matches[2] == 'الملصقات' then
                     return unlock_group_sticker(msg, data)
                 end
-                if matches[2] == 'image' then
+                if matches[2] == 'الصور' then
                 	return unlock_group_image(msg, data)
                 end
-                if matches[2] == 'file' then
+                if matches[2] == 'الملفات' then
                 	return unlock_group_file(msg, data)
                 end
                 --if matches[2] == 'chat' then
@@ -870,10 +867,10 @@ function run(msg, matches)
                 	return unlock_group_all(msg, data)
                 end
             end
-            if matches[1] == 'group' and matches[2] == 'settings' then
+            if matches[1] == '/' and matches[2] == 'اعدادات' then
                 return show_group_settings(msg, data)
             end
-            if matches[1] == 'setname' and is_momod(msg) then
+            if matches[1] == 'ضع الاسم' and is_momod(msg) then
                 local new_name = string.gsub(matches[2], '_', ' ')
                 data[tostring(msg.to.id)]['settings']['set_name'] = new_name
                 save_data(_config.moderation.data, data) 
@@ -881,7 +878,7 @@ function run(msg, matches)
                 local to_rename = 'chat#id'..msg.to.id
                 rename_chat(to_rename, group_name_set, ok_cb, false)
             end
-            if matches[1] == 'setphoto' and is_momod(msg) then
+            if matches[1] == 'ضع صوره' and is_momod(msg) then
                 data[tostring(msg.to.id)]['settings']['set_photo'] = 'waiting'
                 save_data(_config.moderation.data, data)
                 return 'Please send me new group photo now'
@@ -892,19 +889,19 @@ function run(msg, matches)
         if data[tostring(msg.to.id)] then
         	local settings = data[tostring(msg.to.id)]['settings']
         	local get_cmd = matches[1]
-            if matches[1] == 'block' and matches[2] then
+            if matches[1] == 'قفل' and matches[2] then
                 if not is_momod(msg) then
                     return "For moderators only!"
                 end
                 return block_word(receiver, matches[2])
             end
-            if matches[1] == 'unblock' and matches[2] then
+            if matches[1] == 'فتح' and matches[2] then
                 if not is_momod(msg) then
                     return "For moderators only!"
                 end
                 return unblock_word(receiver, matches[2])
             end
-            if matches[1] == 'getlink' then
+            if matches[1] == 'الرابط' then
                 if not is_momod(msg) then
                     return "For moderators only!"
                 end
@@ -916,7 +913,7 @@ function run(msg, matches)
                     export_channel_link(receiver, generate_link, {receiver=receiver, data=data, user_id=msg.from.id})
                 end
             end
-            if matches[1] == 'relink'then
+            if matches[1] == 'رابط'then
                 if not is_momod(msg) then
                     return "Moderators only!"
                 end
@@ -926,21 +923,21 @@ function run(msg, matches)
                     return "Group ID didn't match. Reset invite link failed!"
                 end
             end
-            if matches[1] == 'setabout' and matches[2] then
+            if matches[1] == 'ضع الوصف' and matches[2] then
                 local deskripsi = matches[2]
                 return set_description_chan(msg, data, deskripsi)
             end
-            if matches[1] == 'about' then
+            if matches[1] == 'الوصف' then
                 return get_description(msg, data)
             end
-            if matches[1] == 'setrules' then
+            if matches[1] == ' ضع قوانين' then
                 rules = matches[2]
                 return set_rules(msg, data)
             end
-            if matches[1] == 'rules' then
+            if matches[1] == 'قوانين' then
                 return get_rules(msg, data)
             end
-            if matches[1] == 'close' then --group lock *
+            if matches[1] == 'قفل' then --group lock *
                 --[[if matches[2] == 'name' then
                     return lock_group_name(msg, data)
                 end
@@ -953,29 +950,29 @@ function run(msg, matches)
                 if matches[2] == 'bot' then
                 	return lock_group_bot(msg, data)
                 end]]
-                if matches[2] == 'link' then
+                if matches[2] == 'الروابط' then
                 	return lock_group_link(msg, data)
                 end
-                if matches[2] == 'join' then
+                if matches[2] == 'الانضمام' then
                 	return lock_group_inviteme(msg, data)
                 end
-                if matches[2] == 'sticker' then
+                if matches[2] == 'الملصقات' then
                 	return lock_group_sticker(msg, data)
                 end
-                if matches[2] == 'image' then
+                if matches[2] == 'الصور' then
                 	return lock_group_image(msg, data)
                 end
-                if matches[2] == 'file' then
+                if matches[2] == 'الملفات' then
                 	return lock_group_file(msg, data)
                 end
-                if matches[2] == 'chat' then
+                if matches[2] == 'الدردشه' then
                 	return lock_group_talk(msg, data)
                 end
                 --if matches[2] == 'all' then
                 --	return lock_group_all(msg, data)
                 --end
             end
-            if matches[1] == 'open' then --group unlock *
+            if matches[1] == 'فتح' then --group unlock *
                 --[[if matches[2] == 'name' then
                     return unlock_group_name(msg, data)
                 end
@@ -988,29 +985,29 @@ function run(msg, matches)
                 if matches[2] == 'bot' then
                 	return unlock_group_bot(msg, data)
                 end]]
-                if matches[2] == 'link' then
+                if matches[2] == 'الروابط' then
                 	return unlock_group_link(msg, data)
                 end
-                if matches[2] == 'join' then
+                if matches[2] == 'الانضمام' then
                 	return unlock_group_inviteme(msg, data)
                 end
-                if matches[2] == 'sticker' then
+                if matches[2] == 'الملقات' then
                     return unlock_group_sticker(msg, data)
                 end
-                if matches[2] == 'image' then
+                if matches[2] == 'الصور' then
                 	return unlock_group_image(msg, data)
                 end
-                if matches[2] == 'file' then
+                if matches[2] == 'الملصقات' then
                 	return unlock_group_file(msg, data)
                 end
-                if matches[2] == 'chat' then
+                if matches[2] == 'الدردشه' then
                     return unlock_group_talk(msg, data)
                 end
                 --if matches[2] == 'all' then
                 --	return unlock_group_all(msg, data)
                 --end
             end
-            if matches[1] == 'group' and matches[2] == 'settings' then
+            if matches[1] == '/' and matches[2] == 'اعدادات' then
                 return show_group_settings(msg, data)
             end
             --[[if matches[1] == 'setname' and is_momod(msg) then
@@ -1028,7 +1025,7 @@ function run(msg, matches)
             end]]
         end
     else
-        if matches[1] == 'join' and matches[2] then
+        if matches[1] == 'الانضمام' and matches[2] then
             if string.match(matches[2], '^%d+$') then
                 if not data[tostring(matches[2])] then
                     return 'Group id is not recognized'
@@ -1075,20 +1072,20 @@ return {
           },
       },
   patterns = {
-    "^/(block) (.+)$",
-    "^/(unblock) (.+)$",
-    "^/(getlink)$",
-    "^/(relink) (.+)$",
-    "^/(setabout) (.*)$",
-    "^/(about)$",
-    "^/(setrules) (.*)$",
-    "^/(rules)$",
-    "^/(setname) (.*)$",
-    "^/(setphoto)$",
-    "^/(close) (.*)$",
-    "^/(open) (.*)$",
-    "^/(group) (settings)$",
-    "^/(join) (.+)$",
+    "^/(قفل) (.+)$",
+    "^/(فتح) (.+)$",
+    "^/(الرابط)$",
+    "^/(رابط) (.+)$",
+    "^/(ضع الوصف) (.*)$",
+    "^/(الوصف)$",
+    "^/(ضع قوانين) (.*)$",
+    "^/(قوانين)$",
+    "^/(ضع الاسم) (.*)$",
+    "^/(ضع صوره)$",
+    "^/(قفل) (.*)$",
+    "^/(فتح) (.*)$",
+    "^(/)(اعدادات)$",
+    "^/(الانضمام) (.+)$",
     "%[(photo)%]",
     "%[(document)%]",
     
