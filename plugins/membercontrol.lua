@@ -1,3 +1,4 @@
+
 local function is_spromoted(chat_id, user_id)
   local hash =  'sprom:'..chat_id..':'..user_id
   local spromoted = redis:get(hash)
@@ -35,7 +36,7 @@ local function superban_user_chan(user_id, chat_id)
 end
 
 local function silent_user(user_id, chat_id)
-  local hash =  'silent:'..chat_id..':'..user_id
+  local hash =  'كتم:'..chat_id..':'..user_id
   redis:set(hash, true)
 end
 
@@ -52,7 +53,7 @@ local function is_super_banned(user_id)
 end
 
 local function is_user_silent(user_id, chat_id)
-  local hash =  'silent:'..chat_id..':'..user_id
+  local hash =  'كتم:'..chat_id..':'..user_id
   local silent = redis:get(hash)
   return silent or false
 end
@@ -134,7 +135,7 @@ local function username_id(cb_extra, success, result)
       if vusername == member then
         member_username = member
         member_id = v.peer_id
-        if get_cmd == 'kick' then
+        if get_cmd == 'طرد' then
           if member_id == our_id then
             send_large_msg(receiver, 'Are you kidding?')
             return nil
@@ -151,7 +152,7 @@ local function username_id(cb_extra, success, result)
           end
           return kick_user(member_id, chat_id)
         end
-        if get_cmd == 'ban' then
+        if get_cmd == 'حظر' then
           if member_id == our_id then
             send_large_msg(receiver, 'Are you kidding?')
             return nil
@@ -169,7 +170,7 @@ local function username_id(cb_extra, success, result)
           send_large_msg(receiver, 'User @'..member..' ['..member_id..'] banned')
           return ban_user(member_id, chat_id)
         end
-        if get_cmd == 'sban' then
+        if get_cmd == 'دي' then
           if member_id == our_id then
             return nil
           end
@@ -192,7 +193,7 @@ local function channel_username_id(cb_extra, success, result)
       if vusername == member then
         member_username = member
         member_id = v.peer_id
-        if get_cmd == 'kick' then
+        if get_cmd == 'طرد' then
             if member_id == our_id then
                 send_large_msg(receiver, 'Are you kidding?')
                 return nil
@@ -209,7 +210,7 @@ local function channel_username_id(cb_extra, success, result)
             end
             return kick_user_chan(member_id, chat_id)
         end
-        if get_cmd == 'ban' then
+        if get_cmd == 'حظر' then
           if member_id == our_id then
               send_large_msg(receiver, 'Are you kidding?')
               return nil
@@ -227,14 +228,14 @@ local function channel_username_id(cb_extra, success, result)
           send_large_msg(receiver, 'User @'..member..' ['..member_id..'] banned')
           return ban_user(member_id, chat_id)
         end
-        if get_cmd == 'sban' then
+        if get_cmd == 'دي' then
           if member_id == our_id then
             return nil
           end
           send_large_msg(receiver, 'User @'..member..' ['..member_id..'] globally banned!')
           return superban_user_chan(member_id, chat_id)
         end
-        if get_cmd == 'silent' then
+        if get_cmd == 'كتم' then
           if member_id == our_id then
               return nil
           end
@@ -251,7 +252,7 @@ local function channel_username_id(cb_extra, success, result)
           send_large_msg(receiver, 'User '..member_id..' not allowed to talk!')
           return silent_user(member_id, chat_id)
         end
-        if get_cmd == 'unsilent' then
+        if get_cmd == 'الغاء الكتم' then
           if member_id == our_id then
               return nil
           end
@@ -262,7 +263,7 @@ local function channel_username_id(cb_extra, success, result)
               return nil
             end
           end
-          local hash =  'silent:'..chat_id..':'..member_id
+          local hash =  'كتم:'..chat_id..':'..member_id
           redis:del(hash)
           return send_large_msg(receiver, 'User '..member_id..' allowed to talk')
         end
@@ -287,7 +288,7 @@ local function get_msg_callback(extra, success, result)
   else
     group_type = 'channel'
   end
-  if get_cmd == 'kick' then
+  if get_cmd == 'طرد' then
     if user_id == our_id then
       return nil
     end
@@ -307,7 +308,7 @@ local function get_msg_callback(extra, success, result)
       return kick_user_chan(user_id, chat_id)
     end
   end
-  if get_cmd == 'ban' then
+  if get_cmd == 'حظر' then
     if user_id == our_id then
       return nil
     end
@@ -327,7 +328,7 @@ local function get_msg_callback(extra, success, result)
       return kick_user_chan(user_id, chat_id)
     end
 end
-  if get_cmd == 'unban' then
+  if get_cmd == 'الغاء الحظر' then
     if user_id == our_id then
       return nil
     end
@@ -335,14 +336,14 @@ end
     redis:del(hash)
     return send_large_msg(receiver, 'User '..user_id..' unbanned')
   end
-  if get_cmd == 'sban' then
+  if get_cmd == 'دي' then
     if user_id == our_id then
       return nil
     end
     send_large_msg(receiver, 'User '..username..' ['..user_id..'] globally banned!')
     return superban_user(member_id, chat_id)
   end
-  if get_cmd == 'silent' then
+  if get_cmd == 'كتم' then
     if user_id == our_id then
       return nil
     end
@@ -359,7 +360,7 @@ end
     send_large_msg(receiver, 'User '..user_id..' not allowed to talk!')
     return silent_user(user_id, chat_id)
   end
-  if get_cmd == 'unsilent' then
+  if get_cmd == 'الغاء الكتم' then
     if member_id == our_id then
       return nil
     end
@@ -370,14 +371,14 @@ end
         return nil
       end
     end
-    local hash =  'silent:'..chat_id..':'..user_id
+    local hash =  'كتم:'..chat_id..':'..user_id
     redis:del(hash)
     return send_large_msg(receiver, 'User '..user_id..' allowed to talk')
   end
 end
 
 local function run(msg, matches)
-  if matches[1] == 'kickme' then
+  if matches[1] == 'مغادره' then
     if is_chat_msg(msg) then
       kick_user(msg.from.id, msg.to.id)
     elseif is_channel_msg(msg) then
@@ -393,7 +394,7 @@ local function run(msg, matches)
   local get_cmd = matches[1]
 
   if is_channel_msg(msg) then -- SUPERGROUUUPPPPPPPPPPPP
-    if matches[1] == 'ban' then
+    if matches[1] == 'حظر' then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
       end
@@ -422,7 +423,7 @@ local function run(msg, matches)
           channel_get_users(receiver, chanel_username_id, {get_cmd=get_cmd, receiver=receiver, member=member})
       end
     end
-    if matches[1] == 'unban' then
+    if matches[1] == 'الغاء الحظر' then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
       end
@@ -439,7 +440,7 @@ local function run(msg, matches)
         return 'Use user id only'
       end
     end
-    if matches[1] == 'sban' and is_admin(msg) then
+    if matches[1] == 'دي' and is_admin(msg) then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
       end
@@ -468,14 +469,14 @@ local function run(msg, matches)
         channel_get_users(receiver, chanel_username_id, {get_cmd=get_cmd, receiver=receiver, chat_id=chat_id, member=member})
       end
     end
-    if matches[1] == 'unsban' then
+    if matches[1] == 'الغاء العام' then
       local user_id = matches[2]
       local chat_id = msg.to.id
       local hash =  'superbanned:'..user_id
       redis:del(hash)
       return 'User '..user_id..' unbanned'
     end
-    if matches[1] == 'kick' then
+    if matches[1] == 'طرد' then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
         return
@@ -502,7 +503,7 @@ local function run(msg, matches)
         channel_get_users(receiver, channel_username_id, {get_cmd=get_cmd, receiver=receiver, chat_id=msg.to.id, member=member})
       end
     end
-    if matches[1] == 'silent' then
+    if matches[1] == 'كتم' then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
         return
@@ -530,7 +531,7 @@ local function run(msg, matches)
         channel_get_users(receiver, channel_username_id, {get_cmd=get_cmd, receiver=receiver, chat_id=msg.to.id, member=member})
       end
     end
-    if matches[1] == 'unsilent' then
+    if matches[1] == 'الغاء الكتم' then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
         return
@@ -548,7 +549,7 @@ local function run(msg, matches)
             return 'Admin always allowed to talk!'
           end
         end
-        local hash =  'silent:'..msg.to.id..':'..matches[2]
+        local hash =  'كتم:'..msg.to.id..':'..matches[2]
         redis:del(hash)
         return 'User '..user_id..' allowed to talk'
       else
@@ -559,7 +560,7 @@ local function run(msg, matches)
   end
   
   if is_chat_msg(msg) then -- CHAAAAAAAAATTTTTTTTTTTTTTTTTTTTTT
-    if matches[1] == 'ban' then
+    if matches[1] == 'حظر' then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
       end
@@ -588,7 +589,7 @@ local function run(msg, matches)
           chat_info(receiver, username_id, {get_cmd=get_cmd, receiver=receiver, member=member})
       end
     end
-    if matches[1] == 'unban' then
+    if matches[1] == 'الغاء الحظر' then
       local user_id = matches[2]
       local chat_id = msg.to.id
       if string.match(matches[2], '^%d+$') then
@@ -599,7 +600,7 @@ local function run(msg, matches)
         return 'Use user id only'
       end
     end
-    if matches[1] == 'sban' and is_admin(msg) then
+    if matches[1] == 'دي' and is_admin(msg) then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
       end
@@ -622,18 +623,18 @@ local function run(msg, matches)
           return 'You can\'t ban leader'
         end
         ban_user(user_id, chat_id)
-        send_large_msg(receiver, 'User '..user_id..' globally banned!')
+        send_large_msg(receiver, 'User '..user_id..' globally banned!')      
       else
         local member = string.gsub(matches[2], '@', '')
         chat_info(receiver, username_id, {get_cmd=get_cmd, receiver=receiver, member=member})
       end
     end
-    if matches[1] == 'unsban' then
+    if matches[1] == 'الغاء العام' then
       local hash =  'superbanned:'..user_id
       redis:del(hash)
       return 'User '..user_id..' unbanned'
     end
-    if matches[1] == 'kick' then
+    if matches[1] == 'طرد' then
       if not matches[2] and msg.reply_id then
         get_message(msg.reply_id, get_msg_callback, {get_cmd=get_cmd, receiver=receiver})
         return
@@ -668,7 +669,7 @@ end
 return {
   description = "Plugin to manage bans, kicks and white/black lists.", 
   usage = {
-      user = "!kickme : Exit from group",
+      user = "!مغادره : Exit from group",
       moderator = {
           "!ban user <user_id> : Kick user from chat and kicks it if joins chat again",
           "!ban user <username> : Kick user from chat and kicks it if joins chat again",
@@ -688,20 +689,20 @@ return {
           },
       },
   patterns = {
-    "^/(ban) (.*)$",
-    "^/(unban) (.*)$",
-    "^/(unban)$",
-    "^/(ban)$",
-    "^/(sban) (.*)$",
-    "^/(unsban) (.*)$",
-    "^/(sban)$",
-    "^/(kick) (.*)$",
-    "^/(kick)$",
-    "^/(kickme)$",
-    "^/(silent) (.*)$", --only for supergroup
-    "^/(silent)$",
-    "^/(unsilent) (.*)$",
-    "^/(unsilent)$", --till here
+    "^/(حظر) (.*)$",
+    "^/(الغاء الحظر) (.*)$",
+    "^/(الغاء الحظر)$",
+    "^/(حظر)$",
+    "^/(دي) (.*)$",
+    "^/(الغاء العام) (.*)$",
+    "^/(دي)$",
+    "^/(طرد) (.*)$",
+    "^/(طرد)$",
+    "^/(مغادره)$",
+    "^/(كتم) (.*)$", --only for supergroup
+    "^/(كتم)$",
+    "^/(الغاء الكتم) (.*)$",
+    "^/(الغاء الكتم)$", --till here
     "^!!tgservice (.+)$",
   }, 
   run = run,
