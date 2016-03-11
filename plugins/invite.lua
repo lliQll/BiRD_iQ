@@ -36,7 +36,7 @@ local function get_msg_callback(extra, success, result)
   else
     username = string.gsub(result.from.print_name, '_', ' ')
   end
-  if get_cmd == 'invite' then
+  if get_cmd == 'اضافه' then
     if user_id == our_id then
       return nil
     end
@@ -58,7 +58,7 @@ local function run(msg, matches)
   end
   
   if msg.to.type == "channel" then
-    if matches[1] == "invite" then
+    if matches[1] == "اضافه" then
       if not is_momod(msg) then
         return
       end
@@ -83,8 +83,8 @@ return {
   		},
   	},
   patterns = {
-    "^/(invite) (.*)$",
-    "^/(invite)$",
+    "^/(اضافه) (.*)$",
+    "^/(اضافه)$",
   }, 
   run = run,
   moderated = true 
