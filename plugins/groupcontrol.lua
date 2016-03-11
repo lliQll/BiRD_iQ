@@ -828,7 +828,7 @@ function run(msg, matches)
                 --if matches[2] == 'chat' then
                 --	return lock_group_chat(msg, data)
                 --end
-                if matches[2] == 'all' then
+                if matches[2] == 'الوسائط' then
                 	return lock_group_all(msg, data)
                 end
             end
@@ -863,7 +863,7 @@ function run(msg, matches)
                 --if matches[2] == 'chat' then
                 --	return unlock_group_chat(msg, data)
                 --end
-                if matches[2] == 'all' then
+                if matches[2] == 'الوسائط' then
                 	return unlock_group_all(msg, data)
                 end
             end
