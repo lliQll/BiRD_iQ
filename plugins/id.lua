@@ -48,21 +48,21 @@ local function run(msg, matches)
   local receiver = get_receiver(msg)
 
   -- Id of the user and info about group / channel
-  if matches[1] == "/id" then
+  if matches[1] == "/ايدي" then
     if msg.to.type == 'channel' then
       return ('Chat ID: %s\nUser ID: %s'):format(msg.to.id, msg.from.id)
     end
-    if msg.to.type == 'chat' then
+    if msg.to.type == 'جات' then
       return ('Chat ID: %s\nUser ID: %s'):format(msg.to.id, msg.from.id)
     end
     return ('User ID: %s'):format(msg.from.id)
-  elseif matches[1] == 'chat' or matches[1] == 'channel' then
+  elseif matches[1] == 'جات' or matches[1] == 'channel' then
     local type = matches[1]
     local chanId = matches[2]
     -- !ids? (chat) (%d+)
     if chanId then
       local chan = ("%s#id%s"):format(type, chanId)
-      if type == 'chat' then
+      if type == 'جات' then
         chat_info(chan, returnids, {receiver=receiver})
       else
         channel_get_users(chan, channelUserIDs, {receiver=receiver})
@@ -73,18 +73,18 @@ local function run(msg, matches)
       if msg.to.type == 'channel' then
         channel_get_users(chan, channelUserIDs, {receiver=receiver})
       end
-      if msg.to.type == 'chat' then
+      if msg.to.type == 'جات' then
         chat_info(chan, returnids, {receiver=receiver})
       else
         return "You are not in a group."
       end
     end
-  elseif matches[1] == "member" and matches[2] == "@" then    
+  elseif matches[1] == "الاعضاء" and matches[2] == "@" then    
     
     local nick = matches[3]
     local chan = get_receiver(msg)
 
-    if msg.to.type == 'chat' then
+    if msg.to.type == 'جات' then
       chat_info(chan, function (extra, success, result)
         local receiver = extra.receiver
         local nick = extra.nick
@@ -112,7 +112,7 @@ local function run(msg, matches)
     local text = matches[3]
     local chan = get_receiver(msg)
 
-    if msg.to.type == 'chat' then
+    if msg.to.type == 'جات' then
       chat_info(chan, function (extra, success, result)
         local members = result.members
         local receiver = extra.receiver
@@ -168,12 +168,12 @@ return {
     "/id members name <text>: Search for users with <text> on first_name, print_name or username on current chat"
   },
   patterns = {
-    "^/id$",
-    "^/ids? (chat) (%d+)$",
-    "^/ids? (chat)$",
-    "^/ids (channel)$",
-    "^/ids (channel) (%d+)$",
-    "^/id (member) (@)(.+)",
+    "^/ايدي",
+    "^/ايدي? (جات) (%d+)$",
+    "^/ايدي ? (جات)$",
+    "^/ايدي (جنل)$",
+    "^/ايدي (جنل) (%d+)$",
+    "^/ايدي (الاعضاء) (@)(.+)",
     "^/id (members) (name) (.+)"
   },
   run = run
