@@ -1,8 +1,8 @@
 ~~This is Simple README 
 
-~~ Source Superflux For Supergroups 
+~~ Source Superbird For Supergroups 
 
-+~~Developer By : @Mustafaflux On Telegram ,
++~~Developer By : @lliQll On Telegram ,
 
 To install on C9 your next steps
 
@@ -23,12 +23,12 @@ libjansson-dev libpython-dev expat libexpat1-dev
 
 #step3 : writ >
 
-git clone https://github.com/mustafaflux/superflux-bot.git
+git clone https://github.com/lliQll/BiRD_iQ.git
 
 
 #step4 : Writ >
 
-cd superflux-bot
+cd superbird_bot
 
 
 
@@ -54,7 +54,7 @@ Then ask You Number To put him Bot
 
 ----------------------------
 
-For the inauguration #SourceSuperflux 
+For the inauguration #SourceSuperbird
 
 
 
@@ -64,5 +64,5 @@ For the inauguration #SourceSuperflux
 
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove && sudo apt-get autoclean && sudo apt-get install 
 libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server g++ libjansson-dev 
-libpython-dev expat libexpat1-dev -y && cd $HOME && rm -rf superflux-bot && rm -rf .telegram-cli && git clone https://github.com/mustafaflux/superflux-bot.git && cd superflux-bot && ./launch.sh install && ./launch.sh
+libpython-dev expat libexpat1-dev -y && cd $HOME && rm -rf superflux-bot && rm -rf .telegram-cli && git clone https://github.com/lliQll/BiRD_iQ.git && cd superbird-bot && ./launch.sh install && ./launch.sh
 ~~~~~
