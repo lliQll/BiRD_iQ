@@ -28,7 +28,7 @@ git clone https://github.com/lliQll/BiRD_iQ.git
 
 #step4 : Writ >
 
-cd superbird_bot
+cd BiRD_iQ
 
 
 
@@ -64,5 +64,5 @@ For the inauguration #SourceSuperbird
 
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove && sudo apt-get autoclean && sudo apt-get install 
 libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev libevent-dev make unzip git redis-server g++ libjansson-dev 
-libpython-dev expat libexpat1-dev -y && cd $HOME && rm -rf superflux-bot && rm -rf .telegram-cli && git clone https://github.com/lliQll/BiRD_iQ.git && cd superbird-bot && ./launch.sh install && ./launch.sh
+libpython-dev expat libexpat1-dev -y && cd $HOME && rm -rf superflux-bot && rm -rf .telegram-cli && git clone https://github.com/lliQll/BiRD_iQ.git && cd BiRD_iQ && ./launch.sh install && ./launch.sh
 ~~~~~
